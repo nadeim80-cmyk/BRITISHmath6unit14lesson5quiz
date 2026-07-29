@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 6 - Lesson 43 Quiz - Angle Rules - Engineer Nadeim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3fb;--main:#1E5AA8;--teal:#00A896;--blue:#123B72;--purple:#7B61FF;--yellow:#F5B700;--green:#2AA876;--red:#F25F5C;--orange:#4D96FF;--gold:#F5B700;--text:#213547;--shadow:0 8px 32px rgba(30,90,168,0.15);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;overflow-x:hidden;}
+.bg-shapes{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.shape{position:absolute;opacity:0.07;animation:float 7s ease-in-out infinite;}
+.shape:nth-child(1){width:130px;height:130px;background:var(--main);border-radius:50%;top:4%;left:3%;}
+.shape:nth-child(2){width:90px;height:90px;background:var(--teal);top:12%;right:5%;transform:rotate(45deg);}
+.shape:nth-child(3){width:70px;height:70px;background:var(--blue);border-radius:50%;bottom:20%;left:2%;}
+.shape:nth-child(4){width:100px;height:100px;background:var(--gold);bottom:8%;right:4%;clip-path:polygon(50% 0%,0% 100%,100% 100%);}
+.shape:nth-child(5){width:60px;height:60px;background:var(--orange);top:48%;left:1%;border-radius:30% 70% 70% 30%/30% 30% 70% 70%;}
+.shape:nth-child(6){width:55px;height:55px;background:var(--purple);top:35%;right:1%;transform:rotate(30deg);}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+.header{background:linear-gradient(135deg,#1E5AA8 0%,#123B72 60%,#7B61FF 100%);padding:18px 20px 14px;text-align:center;position:relative;z-index:10;box-shadow:0 4px 20px rgba(30,90,168,0.35);}
+.brand{font-family:'Fredoka One',cursive;color:var(--yellow);font-size:1.1rem;letter-spacing:1px;}
+.brand-phone{color:rgba(255,255,255,0.85);font-size:0.78rem;font-weight:700;}
+.header-title{font-family:'Fredoka One',cursive;color:white;font-size:1.28rem;margin-top:4px;text-shadow:2px 2px 0 rgba(0,0,0,0.15);}
+.header-sub{color:rgba(255,255,255,0.9);font-size:0.82rem;font-weight:700;margin-top:2px;}
+.screen{display:none;position:relative;z-index:5;}
+.screen.active{display:block;}
+.name-screen{min-height:calc(100vh - 110px);display:flex;align-items:center;justify-content:center;padding:30px 20px;}
+.name-card{background:white;border-radius:28px;padding:40px 28px;box-shadow:var(--shadow);max-width:420px;width:100%;text-align:center;border:3px solid var(--yellow);}
+.name-title{font-family:'Fredoka One',cursive;color:var(--main);font-size:1.5rem;margin-bottom:8px;}
+.name-sub{color:#636e72;font-size:0.88rem;margin-bottom:22px;font-weight:700;line-height:1.6;}
+.name-input{width:100%;padding:14px 18px;border:3px solid #dfe6e9;border-radius:16px;font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);outline:none;transition:border-color .2s;margin-bottom:16px;}
+.name-input:focus{border-color:var(--main);}
+.btn-start{background:linear-gradient(135deg,var(--main),var(--orange));color:white;border:none;padding:15px 36px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:1.2rem;cursor:pointer;width:100%;box-shadow:0 6px 20px rgba(232,65,24,0.35);transition:transform .15s;}
+.btn-start:hover{transform:translateY(-2px);}
+.quiz-screen{padding:14px;max-width:720px;margin:0 auto;}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-bottom:12px;background:white;border-radius:18px;padding:11px 14px;box-shadow:var(--shadow);flex-wrap:wrap;}
+.q-counter{font-family:'Fredoka One',cursive;color:var(--main);font-size:0.85rem;}
+.timer-badge{font-family:'Fredoka One',cursive;color:var(--orange);font-size:0.85rem;background:#fff3e6;padding:5px 11px;border-radius:50px;}
+.streak-badge{font-family:'Fredoka One',cursive;color:var(--red);font-size:0.85rem;background:#fde8e4;padding:5px 11px;border-radius:50px;}
+.points-badge{font-family:'Fredoka One',cursive;color:var(--teal);font-size:0.85rem;background:#e0f4ff;padding:5px 11px;border-radius:50px;}
+.hints-badge{font-family:'Fredoka One',cursive;color:var(--purple);font-size:0.85rem;background:#f3eeff;padding:5px 11px;border-radius:50px;}
+.progress-bar-wrap{width:100%;height:10px;background:#fde8e4;border-radius:10px;margin-bottom:14px;overflow:hidden;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--main),var(--orange));border-radius:10px;transition:width .5s ease;}
+.q-card{background:white;border-radius:22px;padding:20px 16px;box-shadow:var(--shadow);margin-bottom:12px;}
+.q-num{font-family:'Fredoka One',cursive;font-size:0.8rem;color:var(--purple);margin-bottom:5px;}
+.badge-row{margin-bottom:8px;}
+.topic-badge{display:inline-block;padding:4px 11px;border-radius:50px;font-size:0.72rem;font-weight:800;margin-right:5px;margin-bottom:5px;background:#fde8e4;color:var(--main);}
+.q-text{font-family:'Fredoka One',cursive;font-size:0.98rem;color:var(--text);margin-bottom:14px;line-height:1.6;white-space:pre-line;}
+.options{display:flex;flex-direction:column;gap:9px;}
+.option-btn{background:#fde8e4;border:3px solid #f5aba0;border-radius:14px;padding:12px 14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.93rem;color:var(--text);cursor:pointer;transition:all .2s;text-align:center;}
+.option-btn:hover:not(:disabled){background:#fbd0c9;border-color:var(--main);transform:translateY(-2px);}
+.option-btn.correct{background:#e6f9e4;border-color:var(--green);color:#1e7b17;}
+.option-btn.wrong{background:#ffe0e6;border-color:var(--red);color:var(--red);}
+.option-btn:disabled{cursor:default;}
+.action-row{display:flex;justify-content:center;gap:9px;margin-bottom:11px;flex-wrap:wrap;}
+.hint-btn{background:linear-gradient(135deg,var(--yellow),var(--orange));border:none;border-radius:50px;padding:9px 18px;font-family:'Fredoka One',cursive;font-size:0.85rem;color:white;cursor:pointer;box-shadow:0 4px 14px rgba(255,154,0,.35);display:flex;align-items:center;gap:5px;transition:transform .15s;}
+.hint-btn:hover{transform:scale(1.04);}
+.hint-btn:disabled{opacity:.4;cursor:default;transform:none;}
+.steps-box{background:linear-gradient(135deg,#fde8e4,#fff3e6);border:2px solid var(--main);border-radius:13px;padding:12px 15px;margin-bottom:11px;display:none;animation:slideDown .3s ease;}
+.steps-box .steps-title{font-family:'Fredoka One',cursive;color:var(--main);font-size:0.9rem;margin-bottom:7px;}
+.steps-box ol{margin-left:16px;font-size:0.83rem;color:#7a1a00;font-weight:700;line-height:1.75;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+.feedback-box{border-radius:13px;padding:11px 14px;margin-top:11px;font-weight:700;font-size:0.9rem;display:none;animation:slideDown .3s ease;}
+.feedback-box.correct{background:#e6f9e4;color:#1e7b17;border:2px solid var(--green);}
+.feedback-box.wrong{background:#ffe0e6;color:var(--red);border:2px solid var(--red);}
+.btn-next{background:linear-gradient(135deg,var(--teal),var(--blue));color:white;border:none;padding:14px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:1.05rem;cursor:pointer;width:100%;box-shadow:0 6px 20px rgba(0,151,230,.35);transition:transform .15s;margin-top:11px;display:none;}
+.btn-next:hover{transform:translateY(-2px);}
+.result-screen{padding:18px;max-width:720px;margin:0 auto;}
+.result-card{background:white;border-radius:26px;padding:28px 22px;box-shadow:var(--shadow);text-align:center;margin-bottom:14px;}
+.result-title{font-family:'Fredoka One',cursive;font-size:1.75rem;color:var(--main);margin-bottom:5px;}
+.result-name{font-size:0.95rem;color:#636e72;font-weight:700;margin-bottom:18px;}
+.score-circle{width:135px;height:135px;border-radius:50%;background:linear-gradient(135deg,var(--main),var(--orange));display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 8px 24px rgba(232,65,24,.35);}
+.score-num{font-family:'Fredoka One',cursive;font-size:2.2rem;color:white;line-height:1;}
+.score-label{font-size:0.7rem;color:rgba(255,255,255,.85);font-weight:700;}
+.stats-row{display:flex;justify-content:center;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
+.stat-box{border-radius:14px;padding:12px 18px;min-width:85px;text-align:center;}
+.stat-box.s-correct{background:#e6f9e4;border:2px solid var(--green);}
+.stat-box.s-wrong{background:#ffe0e6;border:2px solid var(--red);}
+.stat-box.s-time{background:#fff3e6;border:2px solid var(--orange);}
+.stat-box.s-hint{background:#f3eeff;border:2px solid var(--purple);}
+.stat-num{font-family:'Fredoka One',cursive;font-size:1.75rem;}
+.stat-box.s-correct .stat-num{color:#1e7b17;}
+.stat-box.s-wrong .stat-num{color:var(--red);}
+.stat-box.s-time .stat-num{color:var(--orange);}
+.stat-box.s-hint .stat-num{color:var(--purple);}
+.stat-lbl{font-size:0.76rem;font-weight:700;color:#636e72;margin-top:2px;}
+.report-card{background:white;border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-bottom:14px;border-left:6px solid var(--main);}
+.report-title{font-family:'Fredoka One',cursive;color:var(--main);font-size:1.1rem;margin-bottom:12px;}
+.report-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.86rem;font-weight:700;color:var(--text);}
+.report-row:last-of-type{border-bottom:none;}
+.report-row span:last-child{color:var(--main);text-align:right;max-width:60%;}
+.corrections-card{background:white;border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-bottom:14px;border-left:6px solid var(--red);}
+.corrections-title{font-family:'Fredoka One',cursive;color:var(--red);font-size:1.1rem;margin-bottom:12px;}
+.correction-item{background:#fff8f9;border-radius:13px;padding:11px 13px;margin-bottom:9px;border:1px solid #ffd6dc;}
+.corr-q{font-weight:700;color:var(--text);font-size:0.85rem;margin-bottom:5px;}
+.corr-your{color:var(--red);font-size:0.82rem;}
+.corr-right{color:var(--green);font-weight:800;font-size:0.85rem;margin-top:3px;}
+.btn-whatsapp{background:linear-gradient(135deg,#25D366,#128C7E);color:white;border:none;padding:15px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;width:100%;box-shadow:0 6px 20px rgba(37,211,102,.35);transition:transform .15s;margin-bottom:11px;display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;}
+.btn-whatsapp:hover{transform:translateY(-2px);}
+.btn-retry-wrong{background:linear-gradient(135deg,var(--blue),var(--teal));color:white;border:none;padding:13px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;width:100%;box-shadow:0 6px 18px rgba(9,132,227,.3);margin-bottom:11px;transition:transform .15s;}
+.btn-retry-wrong:hover{transform:translateY(-2px);}
+.btn-retry-wrong.disabled{opacity:.5;cursor:default;}
+.btn-back-lesson{background:#fde8e4;color:var(--main);border:none;padding:13px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;width:100%;text-decoration:none;display:block;text-align:center;}
+.btn-print-quiz{background:none;border:2px solid var(--main);color:var(--main);padding:11px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:0.85rem;cursor:pointer;width:100%;margin-top:10px;}
+@media print{
+  @page{size:A4;margin:12mm;}
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important;}
+  body{background:var(--bg) !important;}
+  .bg-shapes,.screen{display:none !important;}
+  #printContainer{display:block !important;}
+  .print-page{page-break-after:always;padding-top:6px;}
+  .print-page:first-child{padding-top:0;}
+  .print-page:last-child{page-break-after:auto;}
+  .print-page .q-card{box-shadow:none;}
+  .print-opt-static{background:#fde8e4;border:3px solid #f5aba0;border-radius:14px;padding:12px 14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.93rem;color:var(--text);text-align:center;margin-bottom:10px;}
+  .print-opt-letter{font-weight:900;margin-right:6px;color:var(--main);}
+}
+#printContainer{display:none;}
+</style>
+</head>
+<body>
+<div class="bg-shapes"><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div></div>
+
+<div class="header">
+  <div class="brand">Engineer Nadeim</div>
+  <div class="brand-phone">01061782782</div>
+  <div class="header-title">Year 6 Maths - Lesson 43 Quiz</div>
+  <div class="header-sub">Angle Rules (Lesson 43 of 51)</div>
+</div>
+
+<div id="nameScreen" class="screen active">
+  <div class="name-screen">
+    <div class="name-card">
+      <div class="name-title">Ready for the quiz?</div>
+      <div class="name-sub">Enter your name to begin. 3 hints are available if you get stuck.</div>
+      <input type="text" class="name-input" id="studentName" placeholder="Your name here..." maxlength="40"/>
+      <button class="btn-start" onclick="_sl()">Start the Quiz</button>
+      <button class="btn-print-quiz" onclick="_printQuiz()">🖨️ Print this quiz (one question per page)</button>
+    </div>
+  </div>
+</div>
+<div id="printContainer"></div>
+
+<div id="quizScreen" class="screen">
+  <div class="quiz-screen">
+    <div class="quiz-top">
+      <div class="q-counter">Q<span id="qNum">1</span>/<span id="qTotal">7</span></div>
+      <div class="timer-badge"><span id="qTimer">0</span>s</div>
+      <div class="streak-badge"><span id="streakLive">0</span> streak</div>
+      <div class="points-badge"><span id="pointsLive">0</span> pts</div>
+      <div class="hints-badge"><span id="hintsLive">3</span> hints left</div>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="q-card">
+      <div class="q-num" id="qNumLabel">Q1</div>
+      <div id="badgeRow" class="badge-row"></div>
+      <div class="q-text" id="qText"></div>
+      <div class="action-row">
+        <button class="hint-btn" id="hintBtn" onclick="_sh()">Use a hint</button>
+      </div>
+      <div class="steps-box" id="stepsBox"></div>
+      <div class="options" id="optionsGrid"></div>
+      <div class="feedback-box" id="feedbackBox"></div>
+      <button class="btn-next" id="btnNext" onclick="_nq()">Next</button>
+    </div>
+  </div>
+</div>
+
+<div id="resultScreen" class="screen">
+  <div class="result-screen">
+    <div class="result-card">
+      <div class="result-title" id="resultTitle">Great job!</div>
+      <div class="result-name" id="resultName"></div>
+      <div class="score-circle"><div class="score-num" id="scoreNum">0</div><div class="score-label" id="scoreLabel">OUT OF 7</div></div>
+      <div class="stats-row">
+        <div class="stat-box s-correct"><div class="stat-num" id="statCorrect">0</div><div class="stat-lbl">Correct</div></div>
+        <div class="stat-box s-wrong"><div class="stat-num" id="statWrong">0</div><div class="stat-lbl">Wrong</div></div>
+        <div class="stat-box s-time"><div class="stat-num" id="statAvgTime">0s</div><div class="stat-lbl">Avg time</div></div>
+        <div class="stat-box s-hint"><div class="stat-num" id="statHints">0</div><div class="stat-lbl">Hints used</div></div>
+      </div>
+      <div id="gradeMsg" style="font-size:0.9rem;color:#636e72;font-weight:700;"></div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-title">Full statistics</div>
+      <div class="report-row"><span>Accuracy</span><span id="repAccuracy">0%</span></div>
+      <div class="report-row"><span>Best streak</span><span id="repStreak">0</span></div>
+      <div class="report-row"><span>Needs review</span><span id="repWeak">-</span></div>
+      <div class="report-row"><span>What's next</span><span id="repSuggestion">-</span></div>
+    </div>
+
+    <div class="corrections-card" id="correctionsCard" style="display:none;">
+      <div class="corrections-title">Questions to review</div>
+      <div id="correctionsList"></div>
+    </div>
+
+    <a class="btn-whatsapp" id="waLink" href="#" target="_blank">Send my result to Engineer Nadeim</a>
+    <button class="btn-retry-wrong" id="btnRetryWrong" onclick="_rw()">Retry wrong questions</button>
+    <a class="btn-back-lesson" href="Lesson_43_Angle_Rules_EXPLANATION.html">Back to the lesson</a>
+  </div>
+</div>
+
+<script>
+const LESSON_TITLE = "Lesson 43: Angle Rules";
+const _Q=[
+{sec:"Angle Rules",
+ q:"A flag pole leans. Taz says it's at 58° from the ground; Wilson says 122°. Could they both be right?",
+ o:["Yes - 58+122=180, a straight line","No, only one can be right","Yes, but only if the pole is vertical","No, angles can't be measured this way"],c:0,
+ s:["Check: 58 + 122 = 180.","Angles on a straight line always add to 180°.","Yes, they're measuring different sides of the same straight-line angle."]},
+
+{sec:"Angle Rules",
+ q:"Two angles on a straight line are 65° and an unknown. Find the unknown angle.",
+ o:["115°","110°","120°","105°"],c:0,
+ s:["Angles on a straight line add to 180°.","180 - 65.","The unknown angle is 115°."]},
+
+{sec:"Angle Rules",
+ q:"Two angles on a straight line are 90° and an unknown. Find the unknown angle.",
+ o:["90°","80°","100°","85°"],c:0,
+ s:["Angles on a straight line add to 180°.","180 - 90.","The unknown angle is 90°."]},
+
+{sec:"Angle Rules",
+ q:"Two angles on a straight line are 133° and an unknown. Find the unknown angle.",
+ o:["47°","45°","50°","43°"],c:0,
+ s:["Angles on a straight line add to 180°.","180 - 133.","The unknown angle is 47°."]},
+
+{sec:"Angle Rules",
+ q:"Alice's cake slice was 90°, Amy's was 40°, George's was 240°. How do you know someone was mistaken?",
+ o:["They add to 370°, more than 360°","They add to exactly 360°","They add to 350°, less than 360°","There's no way to tell"],c:0,
+ s:["Add the angles: 90+40+240.","The total is 370°.","Since angles round a point must add to 360°, someone's numbers are wrong."]},
+
+{sec:"Angle Rules",
+ q:"Three angles meet at a point: 100°, 145°, and one unknown. Find the missing angle.",
+ o:["115°","110°","120°","105°"],c:0,
+ s:["Angles around a point add to 360°.","360 - 100 - 145.","The missing angle is 115°."]},
+
+{sec:"Angle Rules",
+ q:"Three friends split a cake: 120°, 80°, and 200°. Do these numbers make sense for angles round a point?",
+ o:["No - they add to 400°","Yes, they add to 360°","No - they add to 340°","Yes, but rarely"],c:0,
+ s:["Add the angles: 120+80+200.","The total is 400°.","Since this is more than 360°, these numbers don't make sense."]},
+
+{sec:"Angle Rules",
+ q:"Four angles meet at a point: 90°, 90°, 90°, and one unknown. Find the missing angle.",
+ o:["90°","80°","100°","85°"],c:0,
+ s:["Angles around a point add to 360°.","360 - 90 - 90 - 90.","The missing angle is 90°."]},
+
+{sec:"Angle Rules",
+ q:"Find the exterior angle of a regular octagon (8 sides).",
+ o:["45°","40°","50°","36°"],c:0,
+ s:["Exterior angle = 360 ÷ sides.","360 ÷ 8.","The exterior angle is 45°."]},
+
+{sec:"Angle Rules",
+ q:"Find the interior angle of a regular octagon (8 sides).",
+ o:["135°","120°","140°","130°"],c:0,
+ s:["Interior angle = 180 - exterior angle.","Exterior = 360÷8=45. Interior = 180-45.","The interior angle is 135°."]},
+
+{sec:"Angle Rules",
+ q:"Find the exterior angle of a regular pentagon (5 sides).",
+ o:["72°","70°","75°","60°"],c:0,
+ s:["Exterior angle = 360 ÷ sides.","360 ÷ 5.","The exterior angle is 72°."]},
+
+{sec:"Angle Rules",
+ q:"Find the exterior angle of a regular decagon (10 sides).",
+ o:["36°","30°","40°","35°"],c:0,
+ s:["Exterior angle = 360 ÷ sides.","360 ÷ 10.","The exterior angle is 36°."]},
+
+{sec:"Angle Rules",
+ q:"Find the interior angle of a regular decagon (10 sides).",
+ o:["144°","140°","150°","135°"],c:0,
+ s:["Interior angle = 180 - exterior angle.","Exterior = 360÷10=36. Interior = 180-36.","The interior angle is 144°."]},
+
+{sec:"Angle Rules",
+ q:"Two parallel lines are crossed by another line. One angle is 79°, and y is its allied angle. Find y.",
+ o:["101°","100°","105°","99°"],c:0,
+ s:["Allied angles add up to 180°.","180 - 79.","y = 101°."]},
+
+{sec:"Angle Rules",
+ q:"Two parallel lines are crossed by another line. One angle is 54°, and its alternate angle is x. Find x.",
+ o:["54°","126°","36°","90°"],c:0,
+ s:["Alternate angles (Z-shape) are equal.","There's no calculation needed - they match.","x = 54°."]},
+
+{sec:"Angle Rules",
+ q:"Two parallel lines are crossed by another line. One angle is 124°, and its allied angle is a. Find a.",
+ o:["56°","54°","60°","50°"],c:0,
+ s:["Allied angles add up to 180°.","180 - 124.","a = 56°."]},
+
+{sec:"Angle Rules",
+ q:"True or False: Angles on a straight line always add up to 180°.",
+ o:["True","False"],c:0,
+ s:["Think about the straight-line angle rule.","This is a fundamental geometric fact.","This statement is True."]},
+
+{sec:"Angle Rules",
+ q:"True or False: Alternate angles (Z-shape) formed by a line crossing two parallel lines are equal.",
+ o:["True","False"],c:0,
+ s:["Think about the alternate angle rule.","This is a key property of parallel lines.","This statement is True."]},
+
+{sec:"Angle Rules",
+ q:"Two parallel lines are crossed by another line. One angle is 101°, and its allied angle is y. Find y.",
+ o:["79°","81°","75°","85°"],c:0,
+ s:["Allied angles add up to 180°.","180 - 101.","y = 79°."]},
+
+{sec:"Angle Rules",
+ q:"Find the exterior angle of a regular dodecagon (12 sides).",
+ o:["30°","36°","25°","32°"],c:0,
+ s:["Exterior angle = 360 ÷ sides.","360 ÷ 12.","The exterior angle is 30°."]}
+];
+
+let _n='',_cq=0,_sc=0,_ua=[],_ti=null,_qs=0,_st=0,_ms=0,_pts=0,_hintsLeft=3,_hintsUsed=0,_hintUsedThisQ=false;
+function _ss(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+
+let _actx=null;
+function _getActx(){ if(!_actx){ try{ _actx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ _actx=null; } } return _actx; }
+function _tone(freq, start, dur, type, vol){
+  const ctx = _getActx(); if(!ctx) return;
+  const osc = ctx.createOscillator(); const gain = ctx.createGain();
+  osc.type = type||'sine'; osc.frequency.value = freq;
+  gain.gain.setValueAtTime(0, ctx.currentTime+start);
+  gain.gain.linearRampToValueAtTime(vol||0.18, ctx.currentTime+start+0.02);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+start+dur);
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.start(ctx.currentTime+start); osc.stop(ctx.currentTime+start+dur+0.02);
+}
+function _playCorrect(){ _tone(523.25,0,0.14,'sine',0.16); _tone(659.25,0.12,0.14,'sine',0.16); _tone(783.99,0.24,0.22,'sine',0.18); }
+function _playWrong(){ _tone(220,0,0.16,'sawtooth',0.14); _tone(164.81,0.14,0.22,'sawtooth',0.14); }
+function _playClick(){ _tone(880,0,0.05,'square',0.06); }
+function _playFanfare(){ [523.25,659.25,783.99,1046.5].forEach((f,i)=>_tone(f,i*0.14,0.2,'sine',0.16)); }
+
+function _printQuiz(){
+  const container = document.getElementById('printContainer');
+  const letters = ['A','B','C','D'];
+  let html = '';
+  _Q.forEach((q,i)=>{
+    let optsHtml = '';
+    q.o.forEach((opt,j)=>{
+      optsHtml += `<div class="print-opt-static"><span class="print-opt-letter">${letters[j]})</span>${opt}</div>`;
+    });
+    html += `<div class="print-page">
+      <div class="quiz-top" style="margin-bottom:10px;">
+        <div class="q-counter">Q${i+1}/${_Q.length}</div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">Q${i+1}</div>
+        <div class="badge-row"><div class="topic-badge">${q.sec}</div></div>
+        <div class="q-text">${q.q}</div>
+        <div class="options" style="margin-top:14px;">${optsHtml}</div>
+      </div>
+    </div>`;
+  });
+  container.innerHTML = html;
+  setTimeout(()=>{ window.print(); }, 150);
+}
+
+function _sl(){
+  const v=document.getElementById('studentName').value.trim();
+  if(!v){document.getElementById('studentName').style.borderColor='var(--red)';return;}
+  const ctx=_getActx(); if(ctx&&ctx.state==='suspended'){ ctx.resume(); }
+  _n=v;_cq=0;_sc=0;_ua=[];_st=0;_ms=0;_pts=0;_hintsLeft=3;_hintsUsed=0;
+  _ss('quizScreen');
+  document.getElementById('qTotal').textContent=_Q.length;
+  document.getElementById('scoreLabel').textContent='OUT OF '+_Q.length;
+  _lq();
+}
+
+function _lt(){clearInterval(_ti);_qs=Date.now();document.getElementById('qTimer').textContent='0';_ti=setInterval(()=>{document.getElementById('qTimer').textContent=Math.floor((Date.now()-_qs)/1000);},1000);}
+function _stm(){clearInterval(_ti);return Math.round((Date.now()-_qs)/1000);}
+
+function _lq(){
+  const q=_Q[_cq];
+  document.getElementById('qNum').textContent=_cq+1;
+  document.getElementById('qNumLabel').textContent='Q'+(_cq+1);
+  document.getElementById('streakLive').textContent=_st;
+  document.getElementById('pointsLive').textContent=_pts;
+  document.getElementById('hintsLive').textContent=_hintsLeft;
+  document.getElementById('progressFill').style.width=(_cq/_Q.length*100)+'%';
+  document.getElementById('qText').textContent=q.q;
+  document.getElementById('badgeRow').innerHTML=`<div class="topic-badge">${q.sec}</div>`;
+  document.getElementById('stepsBox').style.display='none';
+  document.getElementById('feedbackBox').style.display='none';
+  document.getElementById('feedbackBox').className='feedback-box';
+  document.getElementById('btnNext').style.display='none';
+  document.getElementById('hintBtn').disabled=_hintsLeft<=0;
+  _hintUsedThisQ=false;
+  const g=document.getElementById('optionsGrid');g.innerHTML='';
+  const _idxArr=q.o.map((_,i)=>i);for(let i=_idxArr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[_idxArr[i],_idxArr[j]]=[_idxArr[j],_idxArr[i]];}
+  _idxArr.forEach(origIdx=>{const b=document.createElement('button');b.className='option-btn';b.textContent=q.o[origIdx];b.dataset.origIdx=origIdx;b.onclick=()=>_sa(origIdx);g.appendChild(b);});
+  _lt();
+}
+
+function _sh(){
+  if(_hintsLeft<=0||_hintUsedThisQ)return;
+  _playClick();
+  _hintsLeft--;_hintsUsed++;_hintUsedThisQ=true;
+  document.getElementById('hintsLive').textContent=_hintsLeft;
+  document.getElementById('hintBtn').disabled=true;
+  const q=_Q[_cq];
+  const b=document.getElementById('stepsBox');
+  b.innerHTML=`<div class="steps-title">Hint</div><ol>${q.s.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+  b.style.display='block';
+}
+
+function _sa(i){
+  const q=_Q[_cq];const el=_stm();
+  const bs=document.querySelectorAll('.option-btn');bs.forEach(b=>b.disabled=true);
+  const ok=i===q.c;
+  const clickedBtn=Array.from(bs).find(b=>parseInt(b.dataset.origIdx)===i);
+  clickedBtn.classList.add(ok?'correct':'wrong');
+  if(!ok){const correctBtn=Array.from(bs).find(b=>parseInt(b.dataset.origIdx)===q.c);correctBtn.classList.add('correct');}
+  if(ok){_playCorrect();}else{_playWrong();}
+  const rec={q:q.q,ch:q.o[i],co:q.o[q.c],ok:ok,t:el,sec:q.sec,hint:_hintUsedThisQ};
+  let bm='';
+  if(ok){_sc++;_pts+=10;_st++;if(_st>_ms)_ms=_st;if(_st>0&&_st%3===0){_pts+=15;bm=' +15 streak bonus!';}}
+  else{_st=0;}
+  _ua.push(rec);
+  document.getElementById('streakLive').textContent=_st;
+  document.getElementById('pointsLive').textContent=_pts;
+  const fb=document.getElementById('feedbackBox');
+  fb.className='feedback-box '+(ok?'correct':'wrong');
+  fb.innerHTML=ok?`Correct! (${el}s) +10 pts${bm}`:`Correct answer: <strong>${q.o[q.c]}</strong> (${el}s)`;
+  fb.style.display='block';
+  document.getElementById('btnNext').style.display='block';
+}
+
+function _nq(){_cq++;if(_cq<_Q.length)_lq();else _sres();}
+
+function _sres(){
+  _ss('resultScreen');
+  const tot=_Q.length,wr=tot-_sc,pct=_sc/tot;
+  _playFanfare();
+  const tt=_ua.reduce((s,a)=>s+(a.t||0),0),avg=_ua.length?Math.round(tt/_ua.length):0;
+  document.getElementById('scoreNum').textContent=_sc;
+  document.getElementById('scoreLabel').textContent='OUT OF '+tot;
+  document.getElementById('statCorrect').textContent=_sc;
+  document.getElementById('statWrong').textContent=wr;
+  document.getElementById('statAvgTime').textContent=avg+'s';
+  document.getElementById('statHints').textContent=_hintsUsed;
+  document.getElementById('resultName').textContent=_n;
+  let ti='Good job!',gm='Nice work - keep it up!';
+  if(pct===1){ti='Outstanding!';gm="Perfect score! You're fully ready to move on.";}
+  else if(pct>=0.7){ti='Good job!';gm='Great effort - review the ones you missed, then move on.';}
+  else if(pct>=0.5){ti='Keep practicing!';gm='Go back over the lesson and try again.';}
+  else{ti='Study more first';gm='Review the lesson carefully before trying the quiz again.';}
+  document.getElementById('resultTitle').textContent=ti;
+  document.getElementById('gradeMsg').textContent=gm;
+
+  document.getElementById('repAccuracy').textContent=Math.round(pct*100)+'%';
+  document.getElementById('repStreak').textContent=_ms;
+  const wrongQs=_ua.filter(a=>!a.ok);
+  document.getElementById('repWeak').textContent=wrongQs.length?LESSON_TITLE:'None - all correct!';
+  document.getElementById('repSuggestion').textContent=wrongQs.length===0?'Congratulations! You have completed Year 4 Maths!':'Review the questions below, then retry.';
+
+  if(wrongQs.length>0){
+    document.getElementById('correctionsCard').style.display='block';
+    document.getElementById('correctionsList').innerHTML=wrongQs.map(a=>`<div class="correction-item"><div class="corr-q">Q: ${a.q}</div><div class="corr-your">Your answer: ${a.ch} (${a.t}s)${a.hint?' - hint used':''}</div><div class="corr-right">Correct: ${a.co}</div></div>`).join('');
+    document.getElementById('btnRetryWrong').classList.remove('disabled');
+    document.getElementById('btnRetryWrong').textContent=`Retry ${wrongQs.length} wrong question${wrongQs.length>1?'s':''}`;
+  }else{
+    document.getElementById('correctionsCard').style.display='none';
+    document.getElementById('btnRetryWrong').classList.add('disabled');
+    document.getElementById('btnRetryWrong').textContent='No wrong answers!';
+  }
+
+  const msg=encodeURIComponent(`Year 4 Maths - ${LESSON_TITLE}\nStudent: ${_n}\nScore: ${_sc}/${tot} (${Math.round(pct*100)}%)\nPoints: ${_pts} | Best streak: ${_ms}\nAvg time: ${avg}s | Hints used: ${_hintsUsed}\n`+(wrongQs.length>0?`\nWrong questions:\n`+wrongQs.map(a=>`- ${a.q} -> correct: ${a.co}`).join('\n'):`\nAll correct!`));
+  document.getElementById('waLink').href=`https://wa.me/201061782782?text=${msg}`;
+}
+
+let _wrongQueue=[];
+function _rw(){
+  const wq=_ua.filter(a=>!a.ok);
+  if(wq.length===0)return;
+  _wrongQueue=wq.map(a=>_Q.find(q=>q.q===a.q));
+  const savedQ=_Q.slice();
+  _Q.length=0;_Q.push(..._wrongQueue);
+  _cq=0;_sc=0;_ua=[];_st=0;_ms=0;_pts=0;_hintsLeft=3;_hintsUsed=0;
+  _ss('quizScreen');
+  document.getElementById('qTotal').textContent=_Q.length;
+  _lq();
+}
+</script>
+</body>
+</html>
